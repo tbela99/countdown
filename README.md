@@ -70,6 +70,7 @@ used to perform updates.
 - seconds: remaining seconds
 - time: remaining time in s
 - millis: remaining time in ms
+
 #### complete
 
 Fired when the countdown is completed.
