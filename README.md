@@ -7,7 +7,6 @@ A mootools countdown
 How to use
 ---------------------
 
-It is quite simple to use. what you need first is 
 
 ### HTML:
 
