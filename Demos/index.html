@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Coundown</title>
+<script type="text/javascript" src="../mootools.js"></script>
+<script type="text/javascript" src="../PeriodicalExecuter.js"></script>
+<script type="text/javascript" src="../Source/CountDown.js"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+
+	window.addEvent('domready', function () {
+	
+		(function () {
+					
+			var div = $('counter'),
+				coundown = new CountDown({
+			
+					//initialized 30s from now
+					date: new Date(new Date().getTime() + 30000),
+					//update every 100ms
+					frequency: 100, 
+					//update the div#counter
+					onChange: function(counter) {
+					
+						var text = '';
+						
+						if(counter.days > 0) text = counter.days + ' d ';
+						
+						text += (counter.hours > 10 ? '' : '0') + counter.hours + ':';
+						text += (counter.minutes > 10 ? '' : '0') + counter.minutes + ':';
+						text += (counter.second > 10 ? '' : '0') + counter.second + ':';
+						text += ' - ' + (counter.millis > 10 ? '' : '0') + counter.millis + ':';
+						
+						div.set('text', text)
+					},
+					//complete
+					onComplete: function () {
+					
+						div.set('text', 'Countdown completed.')
+					}
+				})
+				
+		}).delay(5000)
+	})
+//]]></script>
+</head><body><div id="counter">countdown will start in less than 5 seconds</div></body></html>
