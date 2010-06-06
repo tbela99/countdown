@@ -3,6 +3,13 @@ CountDown
 
 A mootools counter / countdown
 
+[Demo](http://tbela99.github.com/countdown/Demos/index.html)
+
+#### More demos
+
+- [countdown](http://tbela99.github.com/countdown/Demos/index.html)
+- [counter](http://tbela99.github.com/countdown/Demos/counter.html)
+
 
 How to use
 ---------------------
