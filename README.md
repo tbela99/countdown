@@ -1,7 +1,7 @@
 CountDown
 ============
 
-A mootools countdown
+A mootools counter / countdown
 
 
 How to use
@@ -15,7 +15,7 @@ How to use
 ### Javascript:
 
 	var div = $('counter'),
-		coundown = new CountDown({
+		countdown = new CountDown({
 	
 			//initialized 30s from now
 			date: new Date(new Date().getTime() + 30000),
@@ -45,6 +45,7 @@ How to use
 
 ### Options:
 
+* countdown  - (*boolean*) if true the object will act as a countdown, if false it will act as a counter. default to true.
 * date  - (*mixed*) the date when the timer will be stopped. it can be a date object, a string representation of a date or time in ms.
 * frequency  - (*int*, optional) frequency between two updates.
 
@@ -82,7 +83,7 @@ Fired when the countdown is completed.
 Method: stop 
 ------------
 
-stops the countdown.
+stops the counter / countdown.
 
 ### Returns:
 
@@ -91,7 +92,7 @@ stops the countdown.
 Method: start
 ----------------
 
-starts the coundown.
+starts the counter / countdown.
 
 ### Returns:
 

@@ -16,24 +16,28 @@ provides: [CountDown]
 
 	var CountDown = new Class({
 		
-		/* 
 		
 		options: {
 	
+		/* 
 			onChange: $empty,
 			onComplete: $empty,
 			date: null,
-			frequency: 1000 //define the update frequency (in ms), default to 1000
+			frequency: 1000, //define the update frequency (in ms), default to 1000
+		*/
+			
+			countdown: true
 		},
 
-		*/
 		Implements: [Options, Events],
 		initialize: function (options) {
 	
 			this.setOptions(options);
 			if(!this.options.date instanceof Date) this.options.date = new Date(this.options.date);
 			
-			this.timer = new PeriodicalExecuter(this.update.bind(this), (this.options.frequency || 1000) / 1000);
+			this.time = this.options.date.getTime();
+			
+			this.timer = new PeriodicalExecuter(this[ this.options.countdown ? 'countdown' : 'count'].bind(this), (this.options.frequency || 1000) / 1000);
 		},
 		stop: function () {
 		
@@ -45,11 +49,11 @@ provides: [CountDown]
 			this.timer.registerCallback();			
 			return this
 		},
-		update: function () {
 		
-			var millis = Math.max(0, this.options.date.getTime() - new Date().getTime()),
+		calcute: function (from, now) {
+					
+			var millis = Math.max(0, from - now),
 				time = Math.floor(millis / 1000),
-				stop = time == 0,
 				countdown = {
 			
 					days: Math.floor(time / (60 * 60 * 24)), 
@@ -64,9 +68,22 @@ provides: [CountDown]
 	        countdown.minutes = Math.floor(time / 60);
 	        countdown.second = time % 60;
 			
+			return countdown
+			
+		}.protect(),
+		
+		count: function () {
+		
+			this.fireEvent('onChange', this.calcute(new Date().getTime(), this.time));
+		},
+		
+		countdown: function () {
+		
+			var countdown = this.calcute(this.time, new Date().getTime());
+			
 			this.fireEvent('onChange', countdown);
 			
-			if(stop) {
+			if(countdown.time == 0) {
 			
 				this.timer.stop();
 				this.fireEvent('onComplete');
